@@ -21,9 +21,8 @@ class SaveFileProcessing{
         String line;
 
         while((line = br.readLine())!= null){
-            String[] stringTokens = line.trim().split(": ");
-            for(String token : stringTokens)
-                tokens.add(token);
+            
+            
             
         }
     }
@@ -32,11 +31,23 @@ class SaveFileProcessing{
 }
 
 /*File format:
-    Question: ... (| ...)*
-    QuestionType: (single/multi ans, multiple choice (has no functionality until further notice)) |
-    Answers: ...+ , ...* |
+    Question: 
+        ...
+        ...
+
+    QuestionType: 
+        (single/multi ans, multiple choice (has no functionality until further notice))
+        ...
+
+    Answers: 
+        ...+ , ...* 
+        ...
+        ...
     
     
+    Note: 
+        - every new line is something from a different question/key
+        - 
     Goal: Process the save file and return a hashtable with <list: question, questiontype, answers | key>
 
 */

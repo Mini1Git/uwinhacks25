@@ -1,7 +1,4 @@
-package dev.alex;
-import java.util.*;
-import java.io.*;
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 abstract class FlashCard {
     private String text;

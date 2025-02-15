@@ -1,4 +1,4 @@
-package dev.alex;
+
 
 public class OptD extends FlashCard{
     boolean isVisible; //Incase only option A and B are needed

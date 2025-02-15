@@ -1,9 +1,10 @@
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 
 class FlashcardInput{
     private String inputFileLocation;
+    private ArrayList tokens;
 
     public FlashcardInput(){
     }
@@ -12,10 +13,14 @@ class FlashcardInput{
 
     }
 
-    public void scanInput() throws FileNotFoundException{
+    public void scanInput() throws Exception{
         BufferedReader br = new BufferedReader(new FileReader(inputFileLocation));
-        while(br.nextLine()!=null){
-            
+        String line;
+        while((line = br.readLine())!= null){
+            String[] token = line.trim().split(": ");
+
+
+
         }
     }
 

@@ -1,4 +1,4 @@
-package dev.alex;
+
 
 public class OptA extends FlashCard {
     double time = 0.0;

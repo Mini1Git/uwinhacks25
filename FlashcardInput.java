@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 class FlashcardInput{
     private String inputFileLocation;
-    private ArrayList tokens;
+    private ArrayList<String> tokens = new ArrayList<>();
 
     public FlashcardInput(){
     }
@@ -18,6 +18,8 @@ class FlashcardInput{
         String line;
         while((line = br.readLine())!= null){
             String[] token = line.trim().split(": ");
+            
+            
 
 
 

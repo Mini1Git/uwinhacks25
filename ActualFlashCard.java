@@ -10,5 +10,6 @@ public class ActualFlashCard{
     //Displays the question
     public void displayQuestion(){
         System.out.println(question + "?");
-    }
+    } 
+    
 }

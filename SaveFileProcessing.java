@@ -33,7 +33,7 @@ class SaveFileProcessing{
                         break;
                     }
 
-                    map.put(++index, new ArrayList<String>());
+                    map.put(++index, new ArrayList<>());
                     map.get(index).add(line);
                 break;
                 
@@ -43,7 +43,7 @@ class SaveFileProcessing{
                         break;
                     }
 
-                    map.put(++index, new ArrayList<String>());
+                    map.put(++index, new ArrayList<>());
                     map.get(index).add(line);
                 break;
 

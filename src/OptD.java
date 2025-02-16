@@ -1,7 +1,7 @@
 
 
 public class OptD extends FlashCard{
-    boolean isVisible; //Incase only option A and B are needed
+    boolean isVisible; //in case only option A and B are needed
     double time = 0.0;
 
     public OptD(String D, boolean isVisible) {
@@ -10,14 +10,14 @@ public class OptD extends FlashCard{
         setPoints(5.0);
     }
 
-    //Constructor used if only String is entered (Assumes D is visable)
+    //Constructor used if only String is entered (Assumes D is visible)
     public OptD(String D) {
         super(D);
         this.isVisible = true;
         setPoints(5.0);
     }
 
-    //Used to swap between visability
+    //Used to swap between visibility
     public void setVisible(boolean visible) {
         this.isVisible = visible;
     }

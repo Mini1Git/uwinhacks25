@@ -1,7 +1,8 @@
-
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
 abstract class FlashCard {
-    private String text;
+    
+	private String text;
     private double points = 0.0;
 
     public FlashCard(String text) {

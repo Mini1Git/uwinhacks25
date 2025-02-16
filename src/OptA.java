@@ -1,7 +1,6 @@
-
-
 public class OptA extends FlashCard {
-    double time = 0.0;
+    
+	double time = 0.0;
 
     public OptA(String A) {
         super(A);
@@ -18,11 +17,11 @@ public class OptA extends FlashCard {
 
     //Displays the text
     @Override
-    void displayText(){
+    void displayText() {
         System.out.println("A: " + getText());
     }
 
-    void CalcPoints(){
+    void CalcPoints() {
         setPoints(getPoints() - (time*0.2));
     }
 }

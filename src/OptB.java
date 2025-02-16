@@ -1,7 +1,6 @@
-
-
-public class OptB extends FlashCard{
-    public double time = 0.0;
+public class OptB extends FlashCard {
+    
+	public double time = 0.0;
 
     public OptB(String B) {
         super(B);

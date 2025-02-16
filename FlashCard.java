@@ -29,8 +29,9 @@ class FlashCard {
 
     // now do we want a seperate iption java file, to handle tohte optiomns logic, or do we cuz i was thinking we coauld use this  function to check which is the coererct answer. 
     public void correctAnswer(){
-        for (int i = 0; i < nOptions; i++){
+        for (int i = 0; i <= nOptions; i++){
             //for every option, if option = string in FlashCard(...,...,String correctAnswer), make that crorrect. or maybe retunr that???
+            //basically, this will work whether the user needs 1,2,3, or 4 options.
         }
     }
     
@@ -51,7 +52,7 @@ class FlashCard {
     public static void main(String[] args) {
         //Test timer
         Timer time = new Timer(10, 10, 2); // instead of having the points linked to the timer, points+timer earned for each question would technically be the same, so i feel like a MASTER class could set these, like a manager class or smt. 
-        Thread t1 = new Thread(time); //so basically, 10 sec timer, total points you can get is 10, every 2 seconds it decreases points by 1.
+        Thread t1 = new Thread(time); //so basically, 10 sec timer, total points you can get is 10, every 2 seconds that passes it decreases points by 1.
         t1.start();
 
         

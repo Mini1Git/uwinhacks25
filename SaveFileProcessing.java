@@ -1,14 +1,14 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.*;
-import java.util.TreeMap;
 
 class SaveFileProcessing{
-    private String inputFileLocation;
+    private final String inputFileLocation;
     private int index = 0;
-    private TreeMap<List<String>, int> map = new HashMap<>();
+    private HashMap<Integer, ArrayList<String>> map = new HashMap<>();
 
-    public SaveFileProcessing(){
+    public SaveFileProcessing(String file){
+        this.inputFileLocation = file; 
     }
 
     private void sortInputs(){
@@ -18,24 +18,47 @@ class SaveFileProcessing{
         BufferedReader br = new BufferedReader(new FileReader(inputFileLocation));
         String line;
         String state = "INITIAL";
+        ArrayList<String> arrList = new ArrayList<>(); //since java kept fucking complaining about it being potentially not initalized despite it being FORCED to initalize on startup. Thanks java
 
         while((line = br.readLine())!= null){
             switch(state){
                 case "INITIAL":
                     state = line.trim().split(":")[0];
-                    this.map.entrySet(new List<String>(), ++index);
+                    
                 break;
                 
                 case "QUESTION":
-    
+                    if(line.trim().equals("\n")){
+                        state = "INITIAL"; 
+                        break;
+                    }
+
+                    map.put(++index, new ArrayList<String>());
+                    map.get(index).add(line);
                 break;
                 
                 case "TYPE":
-                    
+                    if(line.trim().equals("\n")){
+                        state = "INITIAL"; 
+                        break;
+                    }
+
+                    map.put(++index, new ArrayList<String>());
+                    map.get(index).add(line);
                 break;
 
                 case "ANSWERS":
+                    if(line.trim().equals("\n")){
+                        state = "INITIAL"; 
+                        break;
+                    }
 
+                    map.put(++index, new ArrayList<>());
+                    String[] answers = line.split(", ");
+
+                    for(String token : answers){
+                        map.get(index).add(token);
+                    }
                 break;
 
                 case "DEFAULT":

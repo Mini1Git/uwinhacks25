@@ -47,7 +47,7 @@ public class CodeLab6NM extends JPanel implements ActionListener {
 	private static JFrame frame;
 	
 	private static String frame_name = "NM's Lab #6";
-	private static boolean r_tag = true;
+	private static boolean r_tag = false;
 	private static final String OBJECT_NAME = "Textured Disk";
 	
 	/* a function to build and return the content branch */
@@ -58,11 +58,11 @@ public class CodeLab6NM extends JPanel implements ActionListener {
 		sceneBG.addChild(CommonsNM.rotate_Behavior(7500, sceneTG));
 
 		String[] side_name = {"Top", "Side", "JWST"};              // create disk sides
-		sceneTG.addChild(L5TextureSurfaceNM.ring_Shape(side_name[1], 60));
+		sceneTG.addChild(L5TextureSurfaceNM.ring_Shape(side_name[1], 4));
 
 		TransformGroup topTG = new TransformGroup();      // need 'topTG' to move the (top) surface
 		topTG.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-		topTG.addChild(L5TextureSurfaceNM.ring_Shape(side_name[0], 60));
+		topTG.addChild(L5TextureSurfaceNM.ring_Shape(side_name[0], 4));
 
 		Transform3D axisPosition = new Transform3D();
 		axisPosition.rotY(-Math.PI / 2.0);                 // need to move along X-axis
@@ -70,7 +70,7 @@ public class CodeLab6NM extends JPanel implements ActionListener {
 		
 		TransformGroup botTG = new TransformGroup();      // need 'topTG' to move the (top) surface
 		botTG.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-		botTG.addChild(L5TextureSurfaceNM.ring_Shape(side_name[2], 60));
+		botTG.addChild(L5TextureSurfaceNM.ring_Shape(side_name[2], 4));
 
 		Transform3D axPos = new Transform3D();
 		axPos.rotY(Math.PI / 2.0);                 // need to move along X-axis
@@ -89,8 +89,7 @@ public class CodeLab6NM extends JPanel implements ActionListener {
 		canvas3D.setSize(800, 800);                        // set size of canvas
 		SimpleUniverse su = new SimpleUniverse(canvas3D);  // create a SimpleUniverse
 												   // set the viewer's location
-		CommonsNM.define_Viewer(su, new Point3d(1.35, -0.35, 10.0)); 		
-		scene.addChild(CommonsNM.add_Lights(CommonsNM.White, 2));
+		CommonsNM.define_Viewer(su, new Point3d(0, 0, 10.0));
 		
 		scene.compile();			                           // optimize the BranchGroup
 		su.addBranchGraph(scene);                          // attach 'scene' to 'su'
@@ -189,22 +188,6 @@ class CommonsNM extends JPanel {
 		else
 			rotationAlpha.pause();			
 	}
-	
-	/* a function to place one light or two lights at opposite locations */
-	public static BranchGroup add_Lights(Color3f clr, int p_num) {
-		BranchGroup lightBG = new BranchGroup();
-		Point3f atn = new Point3f(0.5f, 0.0f, 0.0f);
-		PointLight ptLight;
-		float adjt = 1f;
-		for (int i = 0; (i < p_num) && (i < 2); i++) {
-			if (i > 0) 
-				adjt = -1f;                                // use 'adjt' to change light position 
-			ptLight = new PointLight(clr, new Point3f(3.0f * adjt, 1.0f, 3.0f  * adjt), atn);
-			ptLight.setInfluencingBounds(hundred_BS);
-			lightBG.addChild(ptLight);                     // attach the point light to 'lightBG'
-		}
-		return lightBG;
-	}
 
 	/* a function to position viewer at 'eye' location */
 	public static void define_Viewer(SimpleUniverse simple_U, Point3d eye) {
@@ -224,7 +207,7 @@ class CommonsNM extends JPanel {
 		SimpleUniverse su = new SimpleUniverse(canvas);    // create a SimpleUniverse
 
 		define_Viewer(su, new Point3d(1, 1, 3));           // set the viewer's location		
-		sceneBG.addChild(add_Lights(White, 1));	
+		
 		sceneBG.compile();		                           // optimize the BranchGroup
 		su.addBranchGraph(sceneBG);                        // attach the scene to SimpleUniverse
 
@@ -261,7 +244,7 @@ class L5TextureSurfaceNM extends GroupObjects {
 		double nt;                                         	// declare variables for the calculation of normal		
 		float x0, y0;
 		                                                   	// prepare points on the circle
-		Point3f c_pts[] = L2StarNM.circle_Points(0, r, n);                
+		Point3f c_pts[] = L2StarNM.rectangle_Points(r, n);                
 		Point3f ctr_pt = new Point3f(0f, 0f, 0.1f);
 		Point3f ctrpt = new Point3f(0f, 0f, -0.1f);
 		Point3f p1, p2;
@@ -374,9 +357,7 @@ class CodeLab2NM extends JPanel implements ActionListener {
 	private static JFrame frame;
 	
 	private static String frame_name = "NM's Lab #2";
-	private static BranchGroup alterableBG, shapeBG;
 	private static boolean r_tag = true;
-	private static boolean object_tag = true;
 	private static final String OBJECT_NAME = "Circle";
 
 	/* a constructor to set up for the application */
@@ -386,8 +367,7 @@ class CodeLab2NM extends JPanel implements ActionListener {
 		canvas3D.setSize(800, 800);                        // set size of canvas
 		SimpleUniverse su = new SimpleUniverse(canvas3D);  // create a SimpleUniverse
 		                                                   // set the viewer's location
-		CommonsNM.define_Viewer(su, new Point3d(1.35, -0.35, 1.5)); 		
-		scene.addChild(CommonsNM.add_Lights(CommonsNM.White, 1));
+		CommonsNM.define_Viewer(su, new Point3d(1.35, -0.35, 1.5));
 		
 		scene.compile();		                           // optimize the BranchGroup
 		su.addBranchGraph(scene);                          // attach 'scene' to 'su'
@@ -416,7 +396,6 @@ class CodeLab2NM extends JPanel implements ActionListener {
 		return menuBar;
 	}
 
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String chosen_item = e.getActionCommand();		
@@ -429,31 +408,6 @@ class CodeLab2NM extends JPanel implements ActionListener {
 			r_tag = (r_tag == true)? false : true;
 			CommonsNM.control_Rotation(r_tag);
 			return;
-		case OBJECT_NAME:                                  // toggle showing both circles
-            // create object and allow detachment
-			BranchGroup tmpBG = new BranchGroup();
-            tmpBG.setCapability(BranchGroup.ALLOW_DETACH);
-
-            if (object_tag) {
-                // big and small circles in shape group
-                GroupObjects bigCircle = new GroupObjects(L2StarNM.line_Shape(0.6f));
-                GroupObjects smallCircle = new GroupObjects(L2StarNM.line(0.5f));
-                tmpBG.addChild(bigCircle.get_ShapeBG());
-                tmpBG.addChild(smallCircle.get_ShapeBG());
-            }
-            else {
-                // only big circle
-                GroupObjects bigCircle = new GroupObjects(L2StarNM.line_Shape(0.6f));
-                tmpBG.addChild(bigCircle.get_ShapeBG());
-            }
-            
-            object_tag = !object_tag;	// update shape state
-
-            // update scene
-            shapeBG.detach();
-            alterableBG.addChild(tmpBG);
-            shapeBG = tmpBG;  // update reference to current shape group
-            break;
         default:
             return;
 		}
@@ -492,73 +446,54 @@ class GroupObjects {
 }
 
 class L2StarNM extends GroupObjects {
-	/* a function to create and return a points on a circle */
-	public static Point3f[] circle_Points(float z, float r, int n) {
-		float x, y;
-		Point3f c_pts[] = new Point3f[n];                  // declare 'n' number of points
+	/* a function to create and return a points on a rectangle */
+	public static Point3f[] rectangle_Points(float width, float height) {
+	    Point3f[] rect_pts = new Point3f[4]; // Four corners of the rectangle
 
-		for (int i = 0; i < n; i++) {                      // calculate x and y
-			x = (float) Math.cos(Math.PI / 180 * (360.0 * i / n)) * r;
-			y = (float) Math.sin(Math.PI / 180 * (360.0 * i / n)) * r;
-			c_pts[i] = new Point3f(x, y, z);               // set points on the circle
-		}
+	    float x = height / 2.0f;
+	    float y = width / 2.0f;
 
-		return c_pts;
+	    rect_pts[0] = new Point3f(-x, -y, 0.0f); // Bottom-left
+	    rect_pts[1] = new Point3f(x, -y, 0.0f);  // Bottom-right
+	    rect_pts[2] = new Point3f(x, y, 0.0f);   // Top-right
+	    rect_pts[3] = new Point3f(-x, y, 0.0f);  // Top-left
+
+	    return rect_pts;
 	}
 	
 	/* a function to create and return the geometry of a circle shape */
-	private static LineArray circle(int num, Color3f clr, float r) {
+	private static LineArray rectangle(float width, float height, Color3f color) {
+	    LineArray lineArr = new LineArray(8, GeometryArray.COLOR_3 | GeometryArray.COORDINATES);
 
-		LineArray lineArr = new LineArray(num * 2,         // give two points for each line
-				GeometryArray.COLOR_3 | GeometryArray.COORDINATES);
+	    Point3f[] rect_pts = rectangle_Points(width, height); // Get rectangle corners
 
-		Point3f c_pts[] = circle_Points(0.0f, r, num);     // prepare points on the circle
+	    // Define edges of the rectangle (connecting points)
+	    lineArr.setCoordinate(0, rect_pts[0]); // Bottom-left -> Bottom-right
+	    lineArr.setCoordinate(1, rect_pts[1]);
 
-		for (int i = 0; i <  num; i++) {                   // define lines for the start
-			lineArr.setCoordinate(i * 2, c_pts[i]);
-			lineArr.setCoordinate(i * 2 + 1, c_pts[(i + 2) % num]);
-			lineArr.setColor(i * 2, clr);    
-			lineArr.setColor(i * 2 + 1, CommonsNM.White);  // set color for end points
-		}
+	    lineArr.setCoordinate(2, rect_pts[1]); // Bottom-right -> Top-right
+	    lineArr.setCoordinate(3, rect_pts[2]);
 
-		return lineArr;
-	}
-	
-	// function for inner circle for different color
-	private static LineArray circle2(int num, Color3f clr, float r) {
+	    lineArr.setCoordinate(4, rect_pts[2]); // Top-right -> Top-left
+	    lineArr.setCoordinate(5, rect_pts[3]);
 
-		LineArray lineArr = new LineArray(num * 2,         // give two points for each line
-				GeometryArray.COLOR_3 | GeometryArray.COORDINATES);
+	    lineArr.setCoordinate(6, rect_pts[3]); // Top-left -> Bottom-left
+	    lineArr.setCoordinate(7, rect_pts[0]);
 
-		Point3f c_pts[] = circle_Points(0.0f, r, num);     // prepare points on the circle
-
-		for (int i = 0; i <  num; i++) {                   // define lines for the start
-			lineArr.setCoordinate(i * 2, c_pts[i]);
-			lineArr.setCoordinate(i * 2 + 1, c_pts[(i + 2) % num]);
-			lineArr.setColor(i * 2, clr);    
-			lineArr.setColor(i * 2 + 1, CommonsNM.Green);  // set color for end points
-		}
-
-		return lineArr;
+	    // Set color for each point
+	    for (int i = 0; i < 8; i++) {
+	        lineArr.setColor(i, color);
+	    }
+	    return lineArr;
 	}
 			
 	/* a function to create and return a Shape3D with one LineArray */
-	public static Shape3D line_Shape(float r) {
-		int n = 60;                                         // create an n-sided start with 'r' radius
-		LineArray circleGeometry = circle(n, CommonsNM.White, r); 
-
-		return new Shape3D(circleGeometry);
+	public static Shape3D line_Shape(float width, float height) {
+	    LineArray rectGeometry = rectangle(width, height, CommonsNM.White);
+	    return new Shape3D(rectGeometry);
 	}
 	
-	// function differentiates color of inner circle
-	public static Shape3D line(float r) {
-		int n = 60;
-		LineArray circleGeometry = circle2(n, CommonsNM.Green, r);
-		
-		return new Shape3D(circleGeometry);
-	}
-	
-	public L2StarNM(float r) {
-		super(line_Shape(r));
+	public L2StarNM(float width, float height) {
+	    super(line_Shape(width, height));
 	}
 }

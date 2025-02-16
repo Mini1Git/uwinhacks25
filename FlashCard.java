@@ -32,6 +32,6 @@ abstract class FlashCard {
 
     public static void main(String[] args) {
         //Test stuff
-        ActualFlashCard newCard = new ActualFlashCard("Testing");
+        DisplayFlashCard newCard = new DisplayFlashCard("Testing");
     }
 }

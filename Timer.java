@@ -2,6 +2,7 @@
 public class Timer implements Runnable{ // use implements so that maybe in future can implement points system
     //make the timer class, that will handle a timer that is ticking down.
     int seconds;
+   
     //constructor for timer.
     Timer(int s){
         seconds = s;
@@ -17,17 +18,19 @@ public class Timer implements Runnable{ // use implements so that maybe in futur
 
 
 
-//this is a function that is specific to threads. doing Thread.start() in void main runs run(). You can make multiple runs if you need.
+//this is a function that is specific to threads. doing Thread.start() in void main runs run(). 
 @Override
 public void run() {
     //while seconds is bigger than 0
-   while (seconds > 0){
-    System.out.println(seconds);
+   while (seconds > 0 && !FlashCard.answered){
+    // System.out.println(seconds);
+
     try { 
         Thread.sleep(1000); 
         seconds--;
-    if (seconds == 0){
-        System.out.println("BOOOOOMMMM!");
+    if (seconds == 0 && !FlashCard.answered){
+        System.out.println("YOU FAILED TO ANSWER!");
+        System.exit(0);
     }
 
 
@@ -40,4 +43,5 @@ public void run() {
 
 
 } 
+
 }

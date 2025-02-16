@@ -14,6 +14,10 @@ class SaveFileProcessing{
     private void sortInputs(){
     }
 
+    public HashMap<Integer, ArrayList<String>> returnMap(){
+        return map;
+    }
+    
     public void scanInput() throws Exception{
         BufferedReader br = new BufferedReader(new FileReader(inputFileLocation));
         String line;

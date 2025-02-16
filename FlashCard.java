@@ -6,9 +6,14 @@ class FlashCard {
     private int nOptions;
     //this boolean is here to check if user answers in the required time. 
     public static boolean answered;
+    private String fileLocation;
     List<String> listofOptions = Arrays.asList("a", "b", "c", "d");
 
-    // flash card and also states the rules, aka how many options for the one question. // up to 4 options for each question.
+    
+    public FlashCard(String file){
+        this.fileLocation = file;
+    }
+
     public FlashCard(String text, int numOptions, String correctAnswer){
         this.text = text;
         if (numOptions > 4){
@@ -17,7 +22,11 @@ class FlashCard {
         }
         nOptions = numOptions;
     }
-
+    
+    /*
+    //testing constructor
+    //flash card and also states the rules, aka how many options for the one question. // up to 4 options for each question.
+    */
     
     public String getText() {
         return text;
@@ -45,11 +54,13 @@ class FlashCard {
         //we need to basically calculae this wiht the timer. oOOH, how about in the timer class, we handle the point logic, and we give the points to a player class. 
         //like, in Timer.java, we can set the timer, but also an interval for ex, timer sets to 10 seconds, but lose one point every 2 secs, but if player gets it right within 4 secs, will only lose 2 points. and if can't answer/answer wrong, get 0.
         
-
-
     }
 
-    public static void main(String[] args) {
+    private void fetchSaveInfo(String fileLocations){
+        
+    }
+
+    public void Play() {
         //Test timer
         Timer time = new Timer(10, 10, 2); // instead of having the points linked to the timer, points+timer earned for each question would technically be the same, so i feel like a MASTER class could set these, like a manager class or smt. 
         Thread t1 = new Thread(time); //so basically, 10 sec timer, total points you can get is 10, every 2 seconds that passes it decreases points by 1.

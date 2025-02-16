@@ -44,7 +44,7 @@ class FlashCard {
     public void CalcPoints(){
         //we need to basically calculae this wiht the timer. oOOH, how about in the timer class, we handle the point logic, and we give the points to a player class. 
         //like, in Timer.java, we can set the timer, but also an interval for ex, timer sets to 10 seconds, but lose one point every 2 secs, but if player gets it right within 4 secs, will only lose 2 points. and if can't answer/answer wrong, get 0.
-
+        
 
 
     }

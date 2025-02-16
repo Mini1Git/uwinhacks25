@@ -1,19 +1,17 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.TreeMap;
 
 class SaveFileProcessing{
     private String inputFileLocation;
-    private ArrayList<String> tokens = new ArrayList<>();
-    private String question;
-    private String type;
-    private ArrayList<String> answers = new ArrayList<>();
+    private int index = 0;
+    private TreeMap<List<String>, int> map = new HashMap<>();
 
     public SaveFileProcessing(){
     }
 
     private void sortInputs(){
-
     }
 
     public void scanInput() throws Exception{
@@ -25,11 +23,11 @@ class SaveFileProcessing{
             switch(state){
                 case "INITIAL":
                     state = line.trim().split(":")[0];
-                    
+                    this.map.entrySet(new List<String>(), ++index);
                 break;
                 
                 case "QUESTION":
-                    
+    
                 break;
                 
                 case "TYPE":
@@ -41,7 +39,7 @@ class SaveFileProcessing{
                 break;
 
                 case "DEFAULT":
-
+                    System.err.println("WARNING! UNKNOWN STATE EXCEPTION DETECTED!");
                 break;
             }      
         }
@@ -70,7 +68,8 @@ class SaveFileProcessing{
     
     Note: 
         - every new line is something from a different question/key
-        - reward modifier will multiply by the base point reward
+        - second new line indicates that the section has ended.
+        - reward modifier will set the answer to the desired points. If empty it will be indicated by - and will be empty
     Goal: Process the save file and return a hashtable with <list: question, questiontype, answers | key>
 
 */

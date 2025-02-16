@@ -27,6 +27,7 @@ public class OptD extends FlashCard{
         return isVisible;
     }
 
+    
     public double getTime() {
         return time;
     }
